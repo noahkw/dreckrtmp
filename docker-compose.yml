@@ -1,0 +1,12 @@
+version: "2.1"
+services:
+  rtmp-server:
+    image: dreckrtmp:latest
+    restart: always
+    environment:
+      ON_PUBLISH: http://api/publish
+      ON_PUBLISH_DONE: http://api/publish/done
+    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+  api:
+    image: dreckrtmpapi:latest
+    restart: always

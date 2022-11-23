@@ -1,0 +1,23 @@
+worker_processes auto;
+rtmp_auto_push on;
+events {}
+rtmp {
+    server {
+        listen 1935;
+        listen [::]:1935 ipv6only=on;
+
+        application live {
+            live on;
+            record off;
+
+            meta copy;
+            hls off;
+
+            allow publish all;
+            allow play all;
+
+            on_publish ${ON_PUBLISH};
+            on_publish_done ${ON_PUBLISH_DONE};
+        }
+    }
+}
