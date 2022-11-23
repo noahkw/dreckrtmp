@@ -1,7 +1,7 @@
 import logging
 
 from starlite import Starlite, Controller, post, Request, Response, Body, RequestEncodingType
-from starlite.status_codes import HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
+from starlite.status_codes import HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED
 from starlite.utils import create_exception_response
 
 from api.models.on_publish import OnPublishIn
@@ -33,10 +33,10 @@ class PublishController(Controller):
     path = "/onpublish"
 
     @post()
-    async def publish_start(self, data: OnPublishIn = Body(media_type=RequestEncodingType.MULTI_PART)) -> bool:
+    async def publish_start(self, data: OnPublishIn = Body(media_type=RequestEncodingType.MULTI_PART)) -> Response:
         print(data)
         # Add auth
-        return True
+        return Response("", status_code=HTTP_401_UNAUTHORIZED)
 
 
 app = Starlite(route_handlers=[PublishController],
