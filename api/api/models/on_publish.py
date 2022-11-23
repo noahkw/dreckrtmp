@@ -1,4 +1,6 @@
-from pydantic import BaseModel, UUID4
+from typing import Optional
+
+from pydantic import BaseModel
 
 
 class OnPublishIn(BaseModel):
@@ -9,8 +11,8 @@ class OnPublishIn(BaseModel):
     addr: str
     clientid: str
     app: str
-    flashVer: str
-    swfUrl: str
-    tcUrl: str
-    pageUrl: str
+    flashVer: Optional[str]
+    swfUrl: Optional[str]
+    tcUrl: Optional[str]
+    pageUrl: Optional[str]
     name: str
